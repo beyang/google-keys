@@ -66,6 +66,8 @@
                 return;
             }
             window.location.href = results[selected].href;
+        } else if (event.key === "Escape") {
+            document.querySelector("input.gsfi").select();
         }
     }, false);
 })();
