@@ -14,6 +14,15 @@
         "searchkeys.js"
       ],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/mail/*"
+      ],
+      "js": [
+        "gmail.js"
+      ],
+      "run_at": "document_end"
     }
   ],
   "manifest_version": 2
