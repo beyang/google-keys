@@ -1,5 +1,5 @@
 function getGitHubURL() {
-  return Array.prototype.slice.call(document.querySelectorAll('a[href^="https://github.com/"]')).filter(a => a.href.indexOf("/issues/") >= 0 || a.href.indexOf("/pull/") >= 0).pop();
+  return Array.prototype.slice.call(document.querySelectorAll('a[href^="https://github.com/"]')).filter(a => a.href.indexOf("/issues/") >= 0 || a.href.indexOf("/pull/") >= 0 || a.href.indexOf("/commit/") >= 0).pop();
 }
 
 function getSourcegraphURL() {
