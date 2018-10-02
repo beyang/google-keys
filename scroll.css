@@ -1,9 +1,9 @@
 ::-webkit-scrollbar {
-    width: 2px;
+    width: 3px;
 }
 
 ::-webkit-scrollbar:horizontal {
-    height: 2px;
+    height: 3px;
 }
 
 ::-webkit-scrollbar-track {
