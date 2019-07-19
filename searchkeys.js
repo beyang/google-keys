@@ -50,8 +50,8 @@
         }
 
         if (event.key === "Tab" || event.key === "ArrowUp" || event.key === "ArrowDown") {
-            event.preventDefault();
-            results = document.querySelector("#ires").querySelectorAll(".r a[href]");
+          event.preventDefault();
+            results = document.querySelector(".srg").querySelectorAll(".r > a[href]");
             if (results.length === 0) {
                 return;
             }
