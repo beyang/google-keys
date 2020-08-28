@@ -14,16 +14,51 @@ function getSourcegraphURL() {
   return Array.prototype.slice.call(document.querySelectorAll('a[href^="httpsf://sourcegraph"]')).filter(a => a.innerText.toLowerCase() === "view it on sourcegraph").pop();
 }
 
+function getURLToOpen() {
+  return getGitHubPRURL() || getGitHubIssueURL() || getGitHubCommitURL() || getSourcegraphURL();
+}
+
 (function() {
-  document.addEventListener('keyup', (event) => {
-    if (event.key === "V" && event.ctrlKey && !event.altKey && !event.metaKey && event.shiftKey) {
-      for (const urlFn of [getGitHubPRURL, getGitHubIssueURL, getGitHubCommitURL, getSourcegraphURL]) {
-        const url = urlFn()
-        if (url) {
-          window.open(url, "_blank");
-          return;
-        }
-      }
+  let intervalID;
+  let i = 0;
+  const maxI = 50;
+  const checkForQuickOpenURLs = () => {
+    if (i <= 0 && intervalID) {
+      clearInterval(intervalID)
+      i = 0;
+      intervalID = undefined;
+      return;
     }
-  });
+    i--;
+
+    const u = getURLToOpen();
+    if (u) {
+      chrome.runtime.sendMessage({ name: "openChildTabs", url: u.href });
+      if (intervalID) {
+        clearInterval(intervalID);
+        i = 0;
+        intervalID = undefined;
+      }
+      return;
+    }
+  }
+
+  const newPage = event => {
+    if (!isGmailEmailPage()) {
+      return;
+    }
+
+    if (intervalID) { // existing loop already exists
+      i = maxI;
+      return;
+    }
+    i = maxI;
+    intervalID = setInterval(checkForQuickOpenURLs, 500);
+  }
+
+  window.addEventListener('popstate', newPage)
 })();
+
+function isGmailEmailPage() {
+  return window.location.hostname === "mail.google.com" && window.location.href.match(/\/[A-Za-z]{32}$/g);
+}
