@@ -8,5 +8,4 @@
 
 
 # Next items
-- [ ] Prevent reload from stealing existing tab
 - [ ] Select existing tab (keyword "t")

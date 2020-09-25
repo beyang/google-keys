@@ -43,6 +43,11 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (navEvent) => {
         return
     }
     const currentTab = await new Promise(resolve => chrome.tabs.get(navEvent.tabId, t => resolve(t)))
+    if (currentTab.url === navEvent.url) {
+        console.log("Skipping navigate to same URL (probably reload)")
+        return
+    }
+
     const windows = await new Promise(resolve => chrome.windows.getAll({ populate: true, windowTypes: ['normal'] }, windows => resolve(windows)));
     const tabs = (await Promise.all(
         windows.map(w => new Promise(resolve => chrome.tabs.getAllInWindow(w.id, tabs => resolve(tabs))))
