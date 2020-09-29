@@ -51,7 +51,7 @@
 
         if (event.key === "Tab" || event.key === "ArrowUp" || event.key === "ArrowDown") {
           event.preventDefault();
-            results = document.querySelector(".srg").querySelectorAll(".r > a[href]");
+            results = document.querySelectorAll("div.r > a[href]");
             if (results.length === 0) {
                 return;
             }
