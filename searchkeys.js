@@ -4,6 +4,9 @@
    */
   let selected = -1;
   let results = [];
+  const resultSelectors = [
+    "div.rc a[href] h3"
+  ];
 
   /**
    * CSS
@@ -51,7 +54,13 @@
 
     if (event.key === "Tab" || event.key === "ArrowUp" || event.key === "ArrowDown") {
       event.preventDefault();
-      results = document.querySelectorAll("div.r > a[href]");
+
+      for (const resultSelector of resultSelectors) {
+        results = document.querySelectorAll(resultSelector);
+        if (results.length > 0) {
+          break;
+        }
+      }
       if (results.length === 0) {
         return;
       }
@@ -65,7 +74,12 @@
       if (results.length === 0) {
         return;
       }
-      window.location.href = results[selected].href;
+      for (let e = results[selected]; e; e = e.parentElement) {
+        if (e.href) {
+          window.location.href = e.href;
+          break;
+        }
+      }
     } else if (event.key === "Escape") {
       document.querySelector("input.gsfi").select();
     }
