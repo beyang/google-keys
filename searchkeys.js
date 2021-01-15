@@ -5,7 +5,7 @@
   let selected = -1;
   let results = [];
   const resultSelectors = [
-    "div.rc a[href] h3"
+    "div.yuRUbf a[href] h3"
   ];
 
   /**
