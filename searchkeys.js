@@ -13,7 +13,8 @@
    */
   let css = document.createElement("style");
   css.type = "text/css";
-  css.innerHTML = '.quick-selected::before { content: "▶"; position: absolute; left: -1em; font-size: 0.75em; top: 0.125em; }';
+  css.className = "google-keys";
+  css.innerHTML = '.quick-selected { background-color: rgba(255, 251, 201, 1); }';
   document.body.appendChild(css);
 
   function isActive() {
