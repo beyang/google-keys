@@ -82,7 +82,12 @@
         }
       }
     } else if (event.key === "Escape") {
-      document.querySelector("input.gsfi").select();
+      const searchBox = document.querySelector("input.gsfi");
+      if (searchBox) {
+        searchBox.select();
+      } else {
+        console.error("searchkeys.js: search box not found");
+      }
     }
   }, false);
 })();

@@ -32,6 +32,15 @@
     },
     {
       "matches": [
+        "https://*.slack.com/archives/*"
+      ],
+      "js": [
+        "slack.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
        "*://*/*"
       ],
       "css": [

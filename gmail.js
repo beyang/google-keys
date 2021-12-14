@@ -18,6 +18,10 @@ function getURLToOpen() {
   return getGitHubPRURL() || getGitHubIssueURL() || getGitHubCommitURL() || getSourcegraphURL();
 }
 
+function isGmailEmailPage() {
+  return window.location.hostname === "mail.google.com" && window.location.href.match(/\/[A-Za-z]{32}$/g);
+}
+
 (function() {
   let intervalID;
   let i = 0;
@@ -58,7 +62,3 @@ function getURLToOpen() {
 
   window.addEventListener('popstate', newPage)
 })();
-
-function isGmailEmailPage() {
-  return window.location.hostname === "mail.google.com" && window.location.href.match(/\/[A-Za-z]{32}$/g);
-}
