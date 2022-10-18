@@ -37,7 +37,14 @@ function isSameURL(u, v) {
     return u === v;
 }
 
-chrome.webNavigation.onBeforeNavigate.addListener(async (navEvent) => {
+async function tabExists(tabId) {
+    const windows = await new Promise(resolve => chrome.windows.getAll({ populate: true, windowTypes: ['normal'] }, windows => resolve(windows)))
+    return (await Promise.all(
+        windows.map(w => new Promise(resolve => chrome.tabs.getAllInWindow(w.id, tabs => resolve(tabs.map(t => t.id).includes(tabId)))))
+    )).includes(true)
+}
+
+const tabSwitcher = async (navEvent) => {
     if (!await tabExists(navEvent.tabId)) {
         console.log("Skipping nonexistent (pre-rendered) tab", navEvent.tabId)
         return
@@ -74,14 +81,9 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (navEvent) => {
 
     // Clean up empty tab in matching tab's former window
     await new Promise(resolve => chrome.tabs.remove(placeholderTab.id, resolve))
-});
-
-async function tabExists(tabId) {
-    const windows = await new Promise(resolve => chrome.windows.getAll({ populate: true, windowTypes: ['normal'] }, windows => resolve(windows)))
-    return (await Promise.all(
-        windows.map(w => new Promise(resolve => chrome.tabs.getAllInWindow(w.id, tabs => resolve(tabs.map(t => t.id).includes(tabId)))))
-    )).includes(true)
 }
+
+chrome.webNavigation.onBeforeNavigate.addListener(tabSwitcher);
 
 // Debug function
 async function printAllWindowsAndTabs() {
