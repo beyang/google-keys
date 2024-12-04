@@ -1,8 +1,8 @@
-chrome.runtime.onInstalled.addListener(function() {
-  console.log("Beyang's Chrome extension has been installed")
-});
+const childrenTabs = {};
 
-const childrenTabs = {}
+self.oninstalled = (event) => {
+  console.log("Beyang's Chrome extension has been installed");
+};
 
 chrome.tabs.onRemoved.addListener(tabId => {
   const childTabIds = childrenTabs[tabId];
@@ -14,21 +14,29 @@ chrome.tabs.onRemoved.addListener(tabId => {
     chrome.tabs.remove(tabId);
   })
   delete childrenTabs[tabId];
-})
+});
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.name !== "openChildTabs") {
     sendResponse(null);
-    return
+    return false;
   }
 
-  chrome.tabs.create({
-    url: request.url,
-    index: sender.tab.index + 1,
-    active: false
-  }, (tab) => {
-    childrenTabs[sender.tab.id] = [tab.id];
-  });
+  (async () => {
+    try {
+      const tab = await chrome.tabs.create({
+        url: request.url,
+        index: sender.tab.index + 1,
+        active: false
+      });
 
-  sendResponse({ "done": true });
+      childrenTabs[sender.tab.id] = [tab.id];
+      sendResponse({ "done": true });
+    } catch (error) {
+      console.error(error);
+      sendResponse({ error: error.message });
+    }
+  })();
+
+  return true;
 });
