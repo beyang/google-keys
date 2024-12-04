@@ -38,14 +38,6 @@
       ],
       "run_at": "document_end"
     },
-    {
-      "matches": [
-       "*://*/*"
-      ],
-      "css": [
-        "scroll.css"
-      ]
-    }
   ],
   "manifest_version": 2
 }
