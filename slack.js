@@ -1,3 +1,6 @@
 (function() {
-  window.location.href = document.querySelector('a[href^="/messages"]').href;
+  const messageLink = document.querySelector('a[href^="/messages"]');
+  if (messageLink) {
+    window.location.href = messageLink.href;
+  }
 })();
