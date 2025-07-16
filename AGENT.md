@@ -4,6 +4,7 @@
 - No build system or test framework present
 - This is a vanilla JavaScript Chrome extension
 - To test: Load unpacked extension in Chrome extensions page
+- **IMPORTANT:** Use `jj` instead of `git` for VCS operations. Do NOT use `git` in this repo.
 
 ## Architecture
 - **Type**: Chrome extension (manifest v3)
