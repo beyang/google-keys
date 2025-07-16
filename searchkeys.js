@@ -14,7 +14,7 @@
   let css = document.createElement("style");
   css.type = "text/css";
   css.className = "google-keys";
-  css.innerHTML = '.quick-selected { background-color: rgba(255, 251, 201, 1); }';
+  css.innerHTML = '.quick-selected::before { content: "> "; position: absolute; left: -15px; color: #1a73e8; font-weight: bold; }';
   document.body.appendChild(css);
 
   function isActive() {
