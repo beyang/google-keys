@@ -45,6 +45,15 @@
         "slack.js"
       ],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://news.ycombinator.com/*"
+      ],
+      "js": [
+        "hackernews.js"
+      ],
+      "run_at": "document_end"
     }
   ],
   "manifest_version": 3
