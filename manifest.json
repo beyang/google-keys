@@ -24,6 +24,7 @@
         "https://*.google.com/search?*"
       ],
       "js": [
+        "keyboardnav.js",
         "searchkeys.js"
       ],
       "run_at": "document_end"
@@ -51,6 +52,7 @@
         "https://news.ycombinator.com/*"
       ],
       "js": [
+        "keyboardnav.js",
         "hackernews.js"
       ],
       "run_at": "document_end"
