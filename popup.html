@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .section {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .danger {
+      background-color: #f44336;
+    }
+    .danger:hover {
+      background-color: #da190b;
+    }
+    #status {
+      margin-top: 10px;
+      padding: 5px;
+      border-radius: 3px;
+      display: none;
+    }
+    .success {
+      background-color: #dff0d8;
+      color: #3c763d;
+      border: 1px solid #d6e9c6;
+    }
+    .error {
+      background-color: #f2dede;
+      color: #a94442;
+      border: 1px solid #ebccd1;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <label for="domain">Domain/Pattern:</label>
+    <input type="text" id="domain" placeholder="e.g., google.com, *.github.com, or example.*">
+    <button id="closeTabs" class="danger">Close Matching Tabs</button>
+  </div>
+  
+  <div id="status"></div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
